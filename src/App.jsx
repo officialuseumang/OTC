@@ -21,7 +21,7 @@ function App() {
       <ScrollToTop />
       <Navbar />
 
-      <main className="w-full">
+      <main className="mx-auto w-full">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/programs" element={<Programs />} />

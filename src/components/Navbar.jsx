@@ -56,15 +56,6 @@ export default function Navbar() {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
   const navigate = useNavigate()
   const auth = getSessionAuth()
-  const publicNavItems = useMemo(
-    () =>
-      site.nav.filter(
-        (item) =>
-          !['/login', '/register', '/signup'].includes(item.to) &&
-          item.label?.toLowerCase() !== 'register'
-      ),
-    []
-  )
 
   const displayName = useMemo(() => getDisplayName(auth), [auth])
   const avatarSrc = useMemo(() => getAvatarDataUrl(displayName), [displayName])
@@ -113,7 +104,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2">
           <nav className="hidden items-center gap-1 sm:flex" aria-label="Primary">
-            {publicNavItems.map((item) => (
+            {site.nav.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
@@ -138,7 +129,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setProfileMenuOpen((v) => !v)}
-                  className="otc-btn flex items-center gap-2 border border-transparent bg-transparent px-4 py-3 text-base text-[#1F2933] hover:bg-[#E5E7EB]"
+                  className="otc-btn flex items-center gap-2 border border-transparent bg-transparent px-4 py-3 text-base text-[#1F2933] hover:bg-[#F3F4F6]"
                   aria-expanded={profileMenuOpen}
                   aria-haspopup="menu"
                 >
@@ -155,14 +146,14 @@ export default function Navbar() {
                     <button
                       type="button"
                       onClick={handleDashboardOpen}
-                      className="block w-full rounded-[2px] px-3 py-2 text-left text-base text-[#1F2933] hover:bg-[#E5E7EB]"
+                      className="block w-full rounded-[2px] px-3 py-2 text-left text-base text-[#1F2933] hover:bg-[#F3F4F6]"
                     >
                       Dashboard
                     </button>
                     <button
                       type="button"
                       onClick={handleLogout}
-                      className="block w-full rounded-[2px] px-3 py-2 text-left text-base text-[#B91C1C] hover:bg-[#FEE2E2]"
+                      className="block w-full rounded-[2px] px-3 py-2 text-left text-base text-[#B91C1C] hover:bg-[#FEF2F2]"
                     >
                       Log out
                     </button>
@@ -170,11 +161,9 @@ export default function Navbar() {
                 ) : null}
               </div>
             ) : (
-              <>
-                {/* <NavLink to="/login" className="otc-btn otc-btn-secondary px-5 py-3 text-base">
-                  Log in
-                </NavLink> */}
-              </>
+              <NavLink to="/login" className="otc-btn otc-btn-secondary px-5 py-3 text-base">
+                Log in
+              </NavLink>
             )}
           </div>
 
@@ -194,7 +183,7 @@ export default function Navbar() {
         <div className="border-t bg-[var(--otc-bg)] sm:hidden otc-divider">
           <div className="otc-container py-4">
             <nav className="grid gap-1">
-              {publicNavItems.map((item) => (
+              {site.nav.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
@@ -222,7 +211,7 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => setProfileMenuOpen((v) => !v)}
-                    className="otc-btn justify-between border border-transparent bg-transparent px-4 py-3 text-base text-[#1F2933] hover:bg-[#E5E7EB]"
+                    className="otc-btn justify-between border border-transparent bg-transparent px-4 py-3 text-base text-[#1F2933] hover:bg-[#F3F4F6]"
                     aria-expanded={profileMenuOpen}
                     aria-haspopup="menu"
                   >
@@ -259,15 +248,13 @@ export default function Navbar() {
                   ) : null}
                 </>
               ) : (
-                <>
-                  {/* <NavLink
-                    to="/login"
-                    onClick={() => setOpen(false)}
-                    className="otc-btn otc-btn-secondary justify-center px-4 py-3 text-base"
-                  >
-                    Log in
-                  </NavLink> */}
-                </>
+                <NavLink
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="otc-btn otc-btn-secondary justify-center px-4 py-3 text-base"
+                >
+                  Log in
+                </NavLink>
               )}
             </div>
           </div>

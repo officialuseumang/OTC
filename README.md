@@ -1,1 +1,3 @@
-delete this readme file and set this up as a new project
+# Open Tech Community
+
+Community learning platform built with React and Vite.

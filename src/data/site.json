@@ -87,9 +87,9 @@
       { "label": "Register", "to": "/register" }
     ],
     "socials": [
-      { "label": "GitHub", "href": "https://github.com/opentechcommunity" },
-      { "label": "Instagram", "href": "https://www.instagram.com/corpolatech" },
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/company/corpola-tech/" }
+      { "label": "GitHub", "href": "https://github.com" },
+      { "label": "Discord", "href": "https://discord.com" },
+      { "label": "LinkedIn", "href": "https://linkedin.com" }
     ],
     "note": "Built with care by the community."
   }
