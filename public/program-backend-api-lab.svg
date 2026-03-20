@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Backend API Lab program image">
+  <defs>
+    <linearGradient id="gBA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#DC2626"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="#FFF7F7"/>
+  <path d="M 0 220 C 220 150, 400 320, 600 250 C 820 170, 980 40, 1200 100 L 1200 0 L 0 0 Z" fill="url(#gBA)" opacity="0.12"/>
+
+  <g opacity="0.92">
+    <rect x="110" y="110" width="980" height="455" rx="18" fill="#FFFFFF" stroke="#F1C5C7"/>
+
+    <g transform="translate(170 205)">
+      <rect width="420" height="270" rx="14" fill="url(#gBA)" opacity="0.14"/>
+      <g opacity="0.88">
+        <rect x="96" y="86" width="228" height="42" rx="12" fill="#FFFFFF"/>
+        <rect x="96" y="144" width="260" height="42" rx="12" fill="#FFFFFF"/>
+        <rect x="96" y="202" width="196" height="42" rx="12" fill="#FFFFFF"/>
+        <path d="M 128 107 h 92" stroke="#DC2626" stroke-width="6" stroke-linecap="round" opacity="0.65"/>
+        <path d="M 128 165 h 132" stroke="#F97316" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+        <path d="M 128 223 h 72" stroke="#DC2626" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+        <circle cx="336" cy="107" r="10" fill="#F97316" opacity="0.65"/>
+      </g>
+    </g>
+
+    <g transform="translate(620 190)">
+      <rect width="420" height="20" rx="10" fill="#111827" opacity="0.08"/>
+      <rect y="38" width="390" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <rect y="64" width="410" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <rect y="90" width="350" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <g transform="translate(0 132)">
+        <rect width="156" height="38" rx="10" fill="url(#gBA)"/>
+        <rect x="168" width="126" height="38" rx="10" fill="#FFFFFF" stroke="#DC2626"/>
+      </g>
+    </g>
+  </g>
+</svg>

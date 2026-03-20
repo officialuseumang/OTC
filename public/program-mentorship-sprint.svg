@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Mentorship Sprint program image">
+  <defs>
+    <linearGradient id="gMS" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FB7185"/>
+      <stop offset="1" stop-color="#E11D48"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="#FFF7F7"/>
+  <path d="M 0 500 C 240 390, 410 700, 690 580 C 920 480, 1060 320, 1200 360 L 1200 675 L 0 675 Z" fill="url(#gMS)" opacity="0.22"/>
+
+  <g opacity="0.92">
+    <rect x="110" y="110" width="980" height="455" rx="18" fill="#FFFFFF" stroke="#F1C5C7"/>
+
+    <g transform="translate(170 210)">
+      <rect width="420" height="250" rx="14" fill="url(#gMS)" opacity="0.16"/>
+      <g opacity="0.9">
+        <circle cx="128" cy="138" r="42" fill="#E11D48" opacity="0.25"/>
+        <circle cx="240" cy="118" r="34" fill="#F97316" opacity="0.18"/>
+        <circle cx="300" cy="168" r="26" fill="#FB7185" opacity="0.22"/>
+        <path d="M 86 184 C 126 152, 172 196, 210 172 C 244 150, 266 134, 332 142" fill="none" stroke="#E11D48" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+      </g>
+    </g>
+
+    <g transform="translate(620 190)">
+      <rect width="420" height="20" rx="10" fill="#111827" opacity="0.08"/>
+      <rect y="38" width="390" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <rect y="64" width="420" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <rect y="90" width="360" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <g transform="translate(0 132)">
+        <rect width="150" height="38" rx="10" fill="url(#gMS)"/>
+        <rect x="162" width="122" height="38" rx="10" fill="#FFFFFF" stroke="#E11D48"/>
+      </g>
+    </g>
+  </g>
+</svg>

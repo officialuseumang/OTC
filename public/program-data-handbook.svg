@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Data Handbook program image">
+  <defs>
+    <linearGradient id="gDH" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E11D48"/>
+      <stop offset="1" stop-color="#FB7185"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="#FFF7F7"/>
+
+  <g opacity="0.92">
+    <rect x="110" y="110" width="980" height="455" rx="18" fill="#FFFFFF" stroke="#F1C5C7"/>
+
+    <g transform="translate(170 200)">
+      <rect width="420" height="280" rx="14" fill="url(#gDH)" opacity="0.14"/>
+      <g opacity="0.85" fill="#E11D48">
+        <rect x="86" y="198" width="48" height="52" rx="10" opacity="0.50"/>
+        <rect x="152" y="156" width="48" height="94" rx="10" opacity="0.44"/>
+        <rect x="218" y="118" width="48" height="132" rx="10" opacity="0.38"/>
+        <rect x="284" y="84" width="48" height="166" rx="10" opacity="0.32"/>
+      </g>
+      <path d="M 86 178 C 152 144, 218 136, 284 102 C 312 88, 338 70, 356 62" fill="none" stroke="#F97316" stroke-width="5" stroke-linecap="round" opacity="0.55"/>
+    </g>
+
+    <g transform="translate(620 190)">
+      <rect width="420" height="20" rx="10" fill="#111827" opacity="0.08"/>
+      <rect y="38" width="390" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <rect y="64" width="420" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <rect y="90" width="350" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <g transform="translate(0 132)">
+        <rect width="152" height="38" rx="10" fill="url(#gDH)"/>
+        <rect x="164" width="124" height="38" rx="10" fill="#FFFFFF" stroke="#E11D48"/>
+      </g>
+    </g>
+  </g>
+</svg>

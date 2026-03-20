@@ -1,0 +1,96 @@
+{
+  "communityName": "Open Tech Community",
+  "tagline": "A warm, practical path into tech—built together.",
+  "brandSubtitle": "open programs • kind mentorship",
+  "nav": [
+    { "label": "Home", "to": "/" },
+    { "label": "Programs", "to": "/programs" },
+    { "label": "Mentors", "to": "/mentors" },
+    { "label": "Resources", "to": "/resources" },
+    { "label": "Register", "to": "/signup" }
+  ],
+  "hero": {
+    "eyebrow": "Community programs and mentorship",
+    "headline": "Practical learning, delivered in chapters.",
+    "subheadline": "Open Tech Community runs guided cohorts and mentorship to help participants build real projects, strengthen fundamentals, and progress with support.",
+    "primaryCta": { "label": "Explore the Journey", "action": "scrollToStory" },
+    "secondaryCta": { "label": "Join the Next Program", "action": "goToNextProgram" }
+  },
+  "homeSections": [
+    {
+      "id": "our-story",
+      "title": "Our story",
+      "lead": "It started as a small circle of builders sharing notes, wins, and blockers.",
+      "body": [
+        "We kept noticing the same thing: talented people were leaving the path because it felt lonely and confusing.",
+        "So we designed a community where learning happens in public—kindly, steadily, with real projects and real support."
+      ]
+    },
+    {
+      "id": "what-we-build",
+      "title": "What we build together",
+      "lead": "Programs, mentorship, and a culture of shipping.",
+      "body": [
+        "We run guided cohorts that feel like chapters—each with a clear start, a steady rhythm, and a satisfying finish.",
+        "Mentors don’t just teach; they co-navigate with you. The goal is momentum you can keep."
+      ]
+    },
+    {
+      "id": "road-ahead",
+      "title": "The road ahead",
+      "lead": "The next chapters are already forming.",
+      "body": [
+        "Upcoming programs focus on practical, modern skills and learning-by-building.",
+        "Pick a chapter that fits your season, and we’ll meet you there."
+      ]
+    },
+    {
+      "id": "how-it-works",
+      "title": "How it works",
+      "lead": "A steady cadence that makes progress feel normal.",
+      "body": [
+        "Each program follows a simple rhythm: learn a concept, build a small piece, then reflect and iterate.",
+        "We keep scope honest so you can finish with pride—and repeat the pattern on your own."
+      ]
+    },
+    {
+      "id": "community-norms",
+      "title": "Community norms",
+      "lead": "Kindness is a technical decision.",
+      "body": [
+        "We ask questions early, we share blockers without shame, and we give feedback that helps people move forward.",
+        "We value clarity over cleverness—and we build a culture where beginners can stay."
+      ]
+    }
+  ],
+  "programGroups": [
+    {
+      "id": "ongoing",
+      "title": "Ongoing",
+      "subtitle": "Chapters currently in motion—jump in and build with us."
+    },
+    {
+      "id": "upcoming",
+      "title": "Upcoming",
+      "subtitle": "Chapters forming now—save your seat and get ready."
+    },
+    {
+      "id": "past",
+      "title": "Past",
+      "subtitle": "Chapters we’ve completed—still full of lessons and pride."
+    }
+  ],
+  "footer": {
+    "links": [
+      { "label": "Programs", "to": "/programs" },
+      { "label": "Mentors", "to": "/mentors" },
+      { "label": "Register", "to": "/register" }
+    ],
+    "socials": [
+      { "label": "GitHub", "href": "https://github.com" },
+      { "label": "Discord", "href": "https://discord.com" },
+      { "label": "LinkedIn", "href": "https://linkedin.com" }
+    ],
+    "note": "Built with care by the community."
+  }
+}

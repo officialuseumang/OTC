@@ -1,0 +1,282 @@
+[
+  {
+    "id": "foundations-web",
+    "title": "Web Foundations: The First Campfire",
+    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+    "tagline": "Build your first real website with a crew that cheers for you.",
+    "description": "We start with the basics—HTML, CSS, and modern JavaScript—then turn them into something you’re proud to ship. It’s gentle, practical, and community-led.",
+    "status": "ongoing",
+    "startDate": "2026-01-06",
+    "endDate": "2026-02-20",
+    "mentors": ["maya", "noah"],
+    "location": "Remote",
+    "experience": [
+      "Weekly build-alongs that feel like co-working",
+      "Office hours where questions are welcomed",
+      "A final demo night with kind feedback"
+    ],
+    "skills": ["HTML", "CSS", "JavaScript", "Accessibility", "Git"],
+    "outcomes": [
+      "Publish a personal site or portfolio",
+      "Make small UI features without fear",
+      "Learn a repeatable build workflow"
+    ],
+    "chapterSections": [
+      {
+        "id": "intro",
+        "title": "Introduction",
+        "content": "This chapter is for beginners who want momentum. We focus on fundamentals that unlock the rest of the web—without the overwhelm."
+      },
+      {
+        "id": "experience",
+        "title": "What you’ll experience",
+        "content": "You’ll learn by building in small steps, with a mentor-guided rhythm. Every week ends with something working." 
+      },
+      {
+        "id": "skills",
+        "title": "Skills & outcomes",
+        "content": "By the end, you’ll have a live project and the confidence to keep going."
+      }
+    ]
+  },
+  {
+    "id": "react-systems",
+    "title": "React Systems: Building with Intent",
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    "tagline": "Turn components into a product story.",
+    "description": "We build a small product front-end with React, focusing on clarity: routing, state, and UI patterns that scale.",
+    "status": "upcoming",
+    "startDate": "2026-03-03",
+    "endDate": "2026-04-24",
+    "mentors": ["aria", "noah"],
+    "location": "Hybrid",
+    "experience": [
+      "A guided build that ships in increments",
+      "Design reviews that are constructive",
+      "Pairing sessions when you get stuck"
+    ],
+    "skills": ["React", "React Router", "Component design", "API basics"],
+    "outcomes": [
+      "Ship a multi-page React app",
+      "Write reusable UI components",
+      "Understand app structure and routing"
+    ],
+    "chapterSections": [
+      {
+        "id": "intro",
+        "title": "Introduction",
+        "content": "This chapter is about building with intention. We’ll keep the UI simple and make the structure strong."
+      },
+      {
+        "id": "experience",
+        "title": "What participants will experience",
+        "content": "You’ll practice shipping in small slices: one route, one feature, one decision at a time."
+      },
+      {
+        "id": "skills",
+        "title": "Skills & outcomes",
+        "content": "You’ll leave with a complete, navigable app and a blueprint you can reuse." 
+      }
+    ]
+  },
+  {
+    "id": "mentorship-sprint",
+    "title": "Mentorship Sprint: From Idea to Demo",
+    "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+    "tagline": "A short sprint to turn a tiny idea into a real demo.",
+    "description": "A fast-paced, supportive sprint for participants who want to practice shipping. Bring an idea (or borrow one) and build alongside mentors.",
+    "status": "past",
+    "startDate": "2025-10-07",
+    "endDate": "2025-11-01",
+    "mentors": ["maya", "aria"],
+    "location": "Remote",
+    "experience": [
+      "A kickoff that clarifies scope",
+      "Mid-sprint check-ins to unblock you",
+      "A final demo night with reflections"
+    ],
+    "skills": ["Scoping", "Prototyping", "Feedback loops"],
+    "outcomes": [
+      "Ship a demo you can show",
+      "Learn how to break work down",
+      "Practice receiving feedback"
+    ],
+    "chapterSections": [
+      {
+        "id": "intro",
+        "title": "Introduction",
+        "content": "This chapter is a sprint, not a marathon. We optimize for learning through shipping."
+      },
+      {
+        "id": "experience",
+        "title": "What you’ll experience",
+        "content": "You’ll make tradeoffs, build the smallest valuable thing, and learn fast." 
+      },
+      {
+        "id": "skills",
+        "title": "Skills & outcomes",
+        "content": "You’ll leave with a demo and a clearer sense of your process." 
+      }
+    ]
+  },
+  {
+    "id": "open-source-onramp",
+    "title": "Open Source Onramp: Issues to Impact",
+    "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80",
+    "tagline": "Learn the rhythm of contributing—without the guesswork.",
+    "description": "A guided, low-pressure onramp to open source. We’ll practice reading projects, choosing issues, making small pull requests, and communicating clearly with maintainers.",
+    "status": "ongoing",
+    "startDate": "2026-01-20",
+    "endDate": "2026-03-07",
+    "mentors": ["noah", "devon"],
+    "location": "Remote",
+    "experience": [
+      "A weekly cadence: read → attempt → ask → ship",
+      "PR walkthroughs that make Git feel normal",
+      "Templates for respectful, confident communication"
+    ],
+    "skills": ["Git", "Open-source workflows", "Code reading", "Communication"],
+    "outcomes": [
+      "Make at least one merged contribution",
+      "Build confidence navigating unfamiliar code",
+      "Learn how to ask for help effectively"
+    ],
+    "chapterSections": [
+      {
+        "id": "intro",
+        "title": "Introduction",
+        "content": "We focus on the process, not perfection. Small contributions compound into real impact."
+      },
+      {
+        "id": "experience",
+        "title": "What you’ll experience",
+        "content": "You’ll practice the full loop: finding an issue, making a change, opening a PR, and responding to review." 
+      },
+      {
+        "id": "skills",
+        "title": "Skills & outcomes",
+        "content": "You’ll leave with a repeatable approach to contributing and a clearer mental model of how projects work." 
+      }
+    ]
+  },
+  {
+    "id": "backend-api-lab",
+    "title": "Backend API Lab: From Routes to Reliability",
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    "tagline": "Build a small API that’s predictable, testable, and kind to users.",
+    "description": "We build a simple REST API and learn the habits that keep it stable: clear contracts, validation, error handling, and lightweight testing.",
+    "status": "upcoming",
+    "startDate": "2026-04-07",
+    "endDate": "2026-05-29",
+    "mentors": ["sana", "devon"],
+    "location": "Remote",
+    "experience": [
+      "Short lessons followed by hands-on implementation",
+      "Examples of real-world edge cases",
+      "A final demo where reliability is part of the story"
+    ],
+    "skills": ["APIs", "Validation", "Error handling", "Testing basics"],
+    "outcomes": [
+      "Ship an API with predictable responses",
+      "Write a small test suite that earns trust",
+      "Understand the tradeoffs of common API patterns"
+    ],
+    "chapterSections": [
+      {
+        "id": "intro",
+        "title": "Introduction",
+        "content": "We keep the scope small so the quality can be high. Reliability is a skill you can practice."
+      },
+      {
+        "id": "experience",
+        "title": "What you’ll experience",
+        "content": "You’ll build routes, then harden them: validate inputs, design errors, and test the behavior." 
+      },
+      {
+        "id": "skills",
+        "title": "Skills & outcomes",
+        "content": "You’ll leave with a backend project you can explain, maintain, and extend." 
+      }
+    ]
+  },
+  {
+    "id": "data-handbook",
+    "title": "Data Handbook: Practical Analytics for Builders",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    "tagline": "From messy questions to clean signals.",
+    "description": "A beginner-friendly chapter on working with data in a practical way: defining metrics, shaping datasets, and telling a truthful story with charts.",
+    "status": "upcoming",
+    "startDate": "2026-05-12",
+    "endDate": "2026-06-20",
+    "mentors": ["maya", "sana"],
+    "location": "Hybrid",
+    "experience": [
+      "Metric design exercises that clarify thinking",
+      "Hands-on data cleaning with simple tools",
+      "Story-first reporting: what matters and why"
+    ],
+    "skills": ["Metrics", "Data cleaning", "Visualization", "Communication"],
+    "outcomes": [
+      "Create a small analytics report you can share",
+      "Learn how to avoid misleading charts",
+      "Build comfort working with imperfect data"
+    ],
+    "chapterSections": [
+      {
+        "id": "intro",
+        "title": "Introduction",
+        "content": "Data work is mostly careful thinking. We’ll practice asking better questions before we touch a chart."
+      },
+      {
+        "id": "experience",
+        "title": "What you’ll experience",
+        "content": "You’ll define metrics, clean a small dataset, and publish a short report with clear conclusions." 
+      },
+      {
+        "id": "skills",
+        "title": "Skills & outcomes",
+        "content": "You’ll leave with a repeatable workflow for turning questions into signals." 
+      }
+    ]
+  },
+  {
+    "id": "career-clinic",
+    "title": "Career Clinic: Portfolio and Interview Fundamentals",
+    "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80",
+    "tagline": "Practical prep that keeps your voice intact.",
+    "description": "A short clinic for early-career builders: clarify your story, refine a portfolio, and practice interviews with structured, kind feedback.",
+    "status": "past",
+    "startDate": "2025-08-05",
+    "endDate": "2025-08-30",
+    "mentors": ["aria", "sana"],
+    "location": "Remote",
+    "experience": [
+      "Portfolio teardown sessions (supportive, specific)",
+      "Mock interviews with actionable feedback",
+      "Narrative coaching for introductions and project stories"
+    ],
+    "skills": ["Storytelling", "Interview practice", "Portfolio review"],
+    "outcomes": [
+      "Improve your portfolio narrative",
+      "Practice interviews in a low-stakes setting",
+      "Leave with a clear next-step plan"
+    ],
+    "chapterSections": [
+      {
+        "id": "intro",
+        "title": "Introduction",
+        "content": "We focus on clarity and confidence. Your story should feel honest and easy to repeat."
+      },
+      {
+        "id": "experience",
+        "title": "What you’ll experience",
+        "content": "You’ll iterate on your portfolio and practice interview reps with feedback you can use immediately." 
+      },
+      {
+        "id": "skills",
+        "title": "Skills & outcomes",
+        "content": "You’ll leave with sharper materials and more comfort speaking about your work." 
+      }
+    ]
+  }
+]

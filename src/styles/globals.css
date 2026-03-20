@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+/*
+  Editorial Design System (strict)
+  - Palette is enforced via CSS variables to avoid ad-hoc colors in components.
+  - Typography is professional sans-serif only (no decorative fonts).
+  - Motion is limited to an optional subtle fade-in (no translate, no transitions).
+*/
+
+:root {
+  /* Palette */
+  --otc-bg: #F8F9FB;
+  --otc-surface: #FFFFFF;
+  --otc-ink: #1F2933;
+  --otc-muted: #6B7280;
+  --otc-line: #E5E7EB;
+  --otc-accent: #1E3A8A;
+  --otc-logo-grad-start: #D39BFF;
+  --otc-logo-grad-mid: #B76BFF;
+  --otc-logo-grad-end: #6F2CB8;
+
+  /* Tokens */
+  --otc-radius: 2px;
+  --otc-max: 1440px;
+
+  /* Typography */
+  --font-primary: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+@layer base {
+  /*
+    Design decision:
+    Put global element rules in a cascade layer so they don't override component classes.
+    (Unlayered `a { color: ... }` will override layered `.otc-btn-primary { color: #fff }`.)
+  */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100dvh;
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: 16px;
+    line-height: 1.75;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--otc-bg);
+    color: var(--otc-ink);
+  }
+
+  a {
+    color: var(--otc-accent);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  ::selection {
+    background: rgba(30, 58, 138, 0.16);
+  }
+}
+
+@layer components {
+  /*
+    Design decision: a small set of semantic utility classes keeps the UI consistent
+    and makes it hard to accidentally introduce off-spec colors.
+  */
+  .otc-container {
+    @apply mx-auto w-full max-w-[1440px] px-5;
+  }
+
+  .otc-page {
+    @apply mx-auto w-full max-w-[1440px] px-5 py-10 sm:py-14;
+  }
+
+  .otc-surface {
+    background: var(--otc-surface);
+    border: 1px solid var(--otc-line);
+    border-radius: var(--otc-radius);
+  }
+
+  .otc-divider {
+    border-color: var(--otc-line);
+  }
+
+  .otc-muted {
+    color: var(--otc-muted);
+  }
+
+  .otc-meta {
+    @apply text-xs font-semibold uppercase tracking-wide;
+    color: var(--otc-muted);
+  }
+
+  .otc-h1 {
+    @apply text-balance text-4xl font-semibold tracking-tight sm:text-5xl;
+    color: var(--otc-ink);
+  }
+
+  .otc-hero-title-gradient {
+    color: var(--otc-logo-grad-end);
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .otc-hero-title-gradient {
+      background: linear-gradient(
+        120deg,
+        var(--otc-logo-grad-start) 8%,
+        var(--otc-logo-grad-mid) 50%,
+        var(--otc-logo-grad-end) 92%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .otc-h2 {
+    @apply text-balance text-2xl font-semibold tracking-tight sm:text-3xl;
+    color: var(--otc-ink);
+  }
+
+  .otc-h3 {
+    @apply text-lg font-semibold tracking-tight;
+    color: var(--otc-ink);
+  }
+
+  .otc-body {
+    color: var(--otc-ink);
+  }
+
+  .otc-prose {
+    @apply text-pretty;
+    color: var(--otc-ink);
+  }
+
+  .otc-btn {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium;
+    border-radius: var(--otc-radius);
+  }
+
+  .otc-btn-primary {
+    background: var(--otc-accent);
+    border: 1px solid var(--otc-accent);
+    color: #ffffff;
+  }
+
+  .otc-btn-secondary {
+    /* Secondary button: outline using the single accent color. */
+    background: var(--otc-surface);
+    border: 1px solid var(--otc-accent);
+    color: var(--otc-accent);
+  }
+
+  .otc-btn-disabled {
+    background: var(--otc-line);
+    border: 1px solid var(--otc-line);
+    color: var(--otc-muted);
+    cursor: not-allowed;
+  }
+
+  .otc-input {
+    @apply w-full px-4 py-3 outline-none;
+    border-radius: var(--otc-radius);
+    border: 1px solid var(--otc-line);
+    background: var(--otc-surface);
+    color: var(--otc-ink);
+  }
+
+  .otc-input:focus {
+    border-color: var(--otc-accent);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+  }
+
+  .otc-link {
+    color: var(--otc-accent);
+    text-decoration: underline;
+  }
+
+  .otc-timeline {
+    position: relative;
+  }
+
+  .otc-timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--otc-line);
+  }
+
+  .otc-timeline-item {
+    position: relative;
+    padding-left: 28px;
+  }
+
+  .otc-timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 36px;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    border: 1px solid var(--otc-accent);
+    background: var(--otc-surface);
+  }
+
+  @media (min-width: 768px) {
+    .otc-timeline::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .otc-timeline-item {
+      width: 50%;
+      padding-left: 0;
+      padding-right: 44px;
+    }
+
+    .otc-timeline-item.is-right {
+      margin-left: 50%;
+      padding-left: 44px;
+      padding-right: 0;
+    }
+
+    .otc-timeline-marker {
+      left: auto;
+      right: 0;
+      transform: translateX(50%);
+    }
+
+    .otc-timeline-item.is-right .otc-timeline-marker {
+      left: 0;
+      right: auto;
+      transform: translateX(-50%);
+    }
+  }
+
+  .otc-timeline-marker.is-active {
+    background: var(--otc-accent);
+  }
+
+  /* Accessibility exception: error color is reserved for validation feedback only. */
+  .otc-error {
+    color: #B91C1C;
+  }
+}
+
+@layer utilities {
+  @keyframes otc-fade-up {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-otc-fade-up {
+    animation: otc-fade-up 240ms ease-out both;
+  }
+}
