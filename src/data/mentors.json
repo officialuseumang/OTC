@@ -6,37 +6,5 @@
     "photo": "https://images.unsplash.com/photo-1525134479668-1bee5c7c6845?auto=format&fit=crop&w=600&q=80",
     "bio": "I love helping people ship their first ‘it works!’ moment. I’m here for the small wins, the questions you think are silly, and the confidence you’ll build along the way.",
     "programs": ["foundations-web", "mentorship-sprint"]
-  },
-  {
-    "id": "noah",
-    "name": "Noah Adeyemi",
-    "expertise": ["React", "Product thinking", "APIs"],
-    "photo": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=600&q=80",
-    "bio": "My favorite mentoring style is collaborative: we’ll reason about choices together, keep scope honest, and make your next step feel obvious.",
-    "programs": ["foundations-web", "react-systems"]
-  },
-  {
-    "id": "aria",
-    "name": "Aria Santos",
-    "expertise": ["Mentorship", "Prototyping", "Developer experience"],
-    "photo": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80",
-    "bio": "I’m here to make building feel human. We’ll aim for clarity over perfection, and we’ll celebrate progress like it matters—because it does.",
-    "programs": ["react-systems", "mentorship-sprint"]
-  },
-  {
-    "id": "devon",
-    "name": "Devon Park",
-    "expertise": ["Open source", "Git", "Code review"],
-    "photo": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80",
-    "bio": "I like demystifying the parts that feel intimidating: reading unfamiliar code, opening a first PR, and turning feedback into forward motion.",
-    "programs": ["open-source-onramp", "backend-api-lab"]
-  },
-  {
-    "id": "sana",
-    "name": "Sana Idris",
-    "expertise": ["APIs", "Data", "Product analytics"],
-    "photo": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80",
-    "bio": "I care about systems that are reliable and explanations that are kind. We’ll keep the scope small, measure what matters, and ship steadily.",
-    "programs": ["backend-api-lab", "data-handbook", "career-clinic"]
   }
 ]

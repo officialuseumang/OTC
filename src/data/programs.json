@@ -80,46 +80,6 @@
     ]
   },
   {
-    "id": "mentorship-sprint",
-    "title": "Mentorship Sprint: From Idea to Demo",
-    "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
-    "tagline": "A short sprint to turn a tiny idea into a real demo.",
-    "description": "A fast-paced, supportive sprint for participants who want to practice shipping. Bring an idea (or borrow one) and build alongside mentors.",
-    "status": "past",
-    "startDate": "2025-10-07",
-    "endDate": "2025-11-01",
-    "mentors": ["maya", "aria"],
-    "location": "Remote",
-    "experience": [
-      "A kickoff that clarifies scope",
-      "Mid-sprint check-ins to unblock you",
-      "A final demo night with reflections"
-    ],
-    "skills": ["Scoping", "Prototyping", "Feedback loops"],
-    "outcomes": [
-      "Ship a demo you can show",
-      "Learn how to break work down",
-      "Practice receiving feedback"
-    ],
-    "chapterSections": [
-      {
-        "id": "intro",
-        "title": "Introduction",
-        "content": "This chapter is a sprint, not a marathon. We optimize for learning through shipping."
-      },
-      {
-        "id": "experience",
-        "title": "What you’ll experience",
-        "content": "You’ll make tradeoffs, build the smallest valuable thing, and learn fast." 
-      },
-      {
-        "id": "skills",
-        "title": "Skills & outcomes",
-        "content": "You’ll leave with a demo and a clearer sense of your process." 
-      }
-    ]
-  },
-  {
     "id": "open-source-onramp",
     "title": "Open Source Onramp: Issues to Impact",
     "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80",
@@ -156,46 +116,6 @@
         "id": "skills",
         "title": "Skills & outcomes",
         "content": "You’ll leave with a repeatable approach to contributing and a clearer mental model of how projects work." 
-      }
-    ]
-  },
-  {
-    "id": "backend-api-lab",
-    "title": "Backend API Lab: From Routes to Reliability",
-    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
-    "tagline": "Build a small API that’s predictable, testable, and kind to users.",
-    "description": "We build a simple REST API and learn the habits that keep it stable: clear contracts, validation, error handling, and lightweight testing.",
-    "status": "upcoming",
-    "startDate": "2026-04-07",
-    "endDate": "2026-05-29",
-    "mentors": ["sana", "devon"],
-    "location": "Remote",
-    "experience": [
-      "Short lessons followed by hands-on implementation",
-      "Examples of real-world edge cases",
-      "A final demo where reliability is part of the story"
-    ],
-    "skills": ["APIs", "Validation", "Error handling", "Testing basics"],
-    "outcomes": [
-      "Ship an API with predictable responses",
-      "Write a small test suite that earns trust",
-      "Understand the tradeoffs of common API patterns"
-    ],
-    "chapterSections": [
-      {
-        "id": "intro",
-        "title": "Introduction",
-        "content": "We keep the scope small so the quality can be high. Reliability is a skill you can practice."
-      },
-      {
-        "id": "experience",
-        "title": "What you’ll experience",
-        "content": "You’ll build routes, then harden them: validate inputs, design errors, and test the behavior." 
-      },
-      {
-        "id": "skills",
-        "title": "Skills & outcomes",
-        "content": "You’ll leave with a backend project you can explain, maintain, and extend." 
       }
     ]
   },
@@ -240,43 +160,83 @@
     ]
   },
   {
-    "id": "career-clinic",
-    "title": "Career Clinic: Portfolio and Interview Fundamentals",
-    "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80",
-    "tagline": "Practical prep that keeps your voice intact.",
-    "description": "A short clinic for early-career builders: clarify your story, refine a portfolio, and practice interviews with structured, kind feedback.",
-    "status": "past",
-    "startDate": "2025-08-05",
-    "endDate": "2025-08-30",
-    "mentors": ["aria", "sana"],
-    "location": "Remote",
-    "experience": [
-      "Portfolio teardown sessions (supportive, specific)",
-      "Mock interviews with actionable feedback",
-      "Narrative coaching for introductions and project stories"
-    ],
-    "skills": ["Storytelling", "Interview practice", "Portfolio review"],
-    "outcomes": [
-      "Improve your portfolio narrative",
-      "Practice interviews in a low-stakes setting",
-      "Leave with a clear next-step plan"
-    ],
-    "chapterSections": [
-      {
-        "id": "intro",
-        "title": "Introduction",
-        "content": "We focus on clarity and confidence. Your story should feel honest and easy to repeat."
-      },
-      {
-        "id": "experience",
-        "title": "What you’ll experience",
-        "content": "You’ll iterate on your portfolio and practice interview reps with feedback you can use immediately." 
-      },
-      {
-        "id": "skills",
-        "title": "Skills & outcomes",
-        "content": "You’ll leave with sharper materials and more comfort speaking about your work." 
-      }
-    ]
-  }
+  "id": "software-freedom-day-2023",
+  "title": "Software Freedom Day: KUCC & KUOSC Celebration",
+  "image": "https://images.unsplash.com/photo-1669023414171-56f0740e34cd?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "tagline": "Celebrating innovation through open collaboration.",
+  "description": "An inspiring day at Kathmandu University dedicated to the world of FOSS, featuring expert talks on high-performance computing, licensing, and open-source careers.",
+  "status": "past",
+  "startDate": "2023-09-16",
+  "endDate": "2023-09-16",
+  "mentors": ["Jurgen Gaeremyn", "Damodar Lohani", "Shubham Joshi", "Arjun Gautam"],
+  "location": "Kathmandu University, Dhulikhel",
+  "experience": [
+    "Expert-led sessions on openHPC and technology trends",
+    "Deep dives into FOSS history and legal licensing frameworks",
+    "Community networking and localization workshops"
+  ],
+  "skills": ["Open Source Advocacy", "High-Performance Computing", "Localization", "Open Tech Strategy"],
+  "outcomes": [
+    "Understand the global impact of the FOSS movement",
+    "Identify career pathways within the open-source ecosystem",
+    "Connect with the local and international developer community"
+  ],
+  "chapterSections": [
+    {
+      "id": "intro",
+      "title": "Introduction",
+      "content": "The event kicked off with a welcome by Ayush Aryal and an introduction to the KUOSC mission by Aadarsha Dhakal, setting a collaborative tone for the day."
+    },
+    {
+      "id": "experience",
+      "title": "What you’ll experience",
+      "content": "Attendees explored technical frontiers like openHPC with Shubham Joshi, navigated legal landscapes with Samikshya Upadhyay, and learned about LibreOffice localization with Saroj Dhakal."
+    },
+    {
+      "id": "skills",
+      "title": "Skills & outcomes",
+      "content": "Participants gained a clearer vision of open-source career opportunities and the practical application of open technology in modern industry."
+    }
+  ]
+},
+{
+  "id": "mapping-mania-2023",
+  "title": "Mapping Mania: OpenStreetMap Showcase",
+  "image": "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200&q=80",
+  "tagline": "Harnessing open-source mapping for positive change.",
+  "description": "A collaborative event focused on OpenStreetMap (OSM) technology, featuring hands-on mapping workshops, humanitarian use cases, and community-driven innovation.",
+  "status": "past",
+  "startDate": "2023-07-21",
+  "endDate": "2023-07-21",
+  "mentors": ["Gaurav Shah", "Sushma Ghimire", "Amrit K. Aryal", "Feye Andal", "Ashok Rebmad Thakulla"],
+  "location": "Sagarmatha College of Engineering",
+  "experience": [
+    "Live mapping workshops with hands-on guidance",
+    "Humanitarian mapping sessions focused on crisis response",
+    "Product showcase for innovative OSM-based tools"
+  ],
+  "skills": ["OpenStreetMap (OSM)", "FOSS Advocacy", "Geospatial Data", "Humanitarian Mapping"],
+  "outcomes": [
+    "Create and manage a live OpenStreetMap user profile",
+    "Contribute to global humanitarian mapping initiatives",
+    "Engage with the regional YouthMappers and OSM community"
+  ],
+  "chapterSections": [
+    {
+      "id": "intro",
+      "title": "Introduction",
+      "content": "Gaurav Shah opened the session with a primer on FOSS, followed by Sushma Ghimire's exploration of OSM use cases in urban planning and disaster management."
+    },
+    {
+      "id": "experience",
+      "title": "What you’ll experience",
+      "content": "Participants engaged in live mapping drills led by Amrit K. Aryal and Ashok Rebmad Thakulla, while Feye Andal shared powerful stories of mapping for humanitarian aid."
+    },
+    {
+      "id": "skills",
+      "title": "Skills & outcomes",
+      "content": "Beyond technical mapping, attendees learned about community building from Nishan K. Aryal and explored the future of open-source geospatial products with Arjun Gautam."
+    }
+  ]
+}
 ]
