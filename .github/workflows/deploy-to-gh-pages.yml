@@ -1,4 +1,4 @@
-name: Deploy to opentechcommunity gh-pages
+name: Sync to opentechcommunity gh-pages
 
 on:
   push:
@@ -7,109 +7,72 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-opentechcommunity-gh-pages
+  group: sync-gh-pages
   cancel-in-progress: true
 
 jobs:
   deploy:
-    if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/main'
+    if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    defaults:
-      run:
-        shell: bash
 
     steps:
       - name: Checkout source repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1
-          clean: true
 
-      - name: Deploy to target gh-pages branch
+      - name: Push to target gh-pages
         env:
           TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
-          GIT_TERMINAL_PROMPT: "0"
-          SOURCE_REPO: ctpl-git/ctpl-sys-site-opentechcommunity
           TARGET_REPO: opentechcommunity/opentechcommunity.github.io
         run: |
           set -euo pipefail
 
           if [ -z "$TARGET_REPO_TOKEN" ]; then
-            echo "TARGET_REPO_TOKEN is not set"
-            exit 1
-          fi
-
-          if [ "${GITHUB_REPOSITORY}" != "$SOURCE_REPO" ]; then
-            echo "Refusing to deploy from unexpected source repository: ${GITHUB_REPOSITORY}"
-            exit 1
-          fi
-
-          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
-            echo "Refusing to deploy from unexpected source ref: ${GITHUB_REF}"
+            echo "Missing TARGET_REPO_TOKEN"
             exit 1
           fi
 
           echo "::add-mask::$TARGET_REPO_TOKEN"
 
-          git config --local user.name "github-actions"
-          git config --local user.email "actions@github.com"
-          git config --local --unset-all http.https://github.com/.extraheader || true
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
 
+          # Remove default auth so PAT is used
+          git config --global --unset-all http.https://github.com/.extraheader || true
+
+          # Add target repo
           git remote remove target 2>/dev/null || true
           git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/${TARGET_REPO}.git
 
-          if ! git ls-remote --exit-code target HEAD >/dev/null 2>&1; then
-            echo "Cannot access target repo ${TARGET_REPO} with TARGET_REPO_TOKEN"
-            echo "Verify the secret exists, is valid, and has repository write access."
-            exit 1
-          fi
-
-          if ! git push --dry-run target HEAD:gh-pages >/dev/null 2>&1; then
-            echo "Preflight push check failed for target branch gh-pages"
-            echo "Verify token write permissions and target branch protection rules."
-            exit 1
-          fi
-
-          # Push with retries (handles transient failures, race conditions, and lease issues)
+          # Retry push logic
           max_attempts=3
           attempt=1
 
           while [ "$attempt" -le "$max_attempts" ]; do
-            echo "Attempt $attempt of $max_attempts..."
+            echo "Attempt $attempt..."
 
-            remote_sha=""
+            # Fetch remote branch (avoids stale push issues)
+            git fetch target gh-pages || true
+
             if git ls-remote --exit-code --heads target gh-pages >/dev/null 2>&1; then
-              remote_sha="$(git ls-remote --heads target gh-pages | awk '{print $1}')"
-              # Use explicit lease value to avoid stale local tracking reference issues in CI.
-              if git push target HEAD:gh-pages --force-with-lease=refs/heads/gh-pages:${remote_sha} --porcelain; then
-                echo "Push succeeded on attempt $attempt"
+              if git push target HEAD:gh-pages --force; then
+                echo "Push successful"
                 break
               fi
             else
-              # First push (branch doesn't exist yet)
-              if git push target HEAD:gh-pages --porcelain; then
-                echo "Initial push succeeded on attempt $attempt"
+              if git push target HEAD:gh-pages; then
+                echo "Initial push successful"
                 break
               fi
             fi
 
             if [ "$attempt" -eq "$max_attempts" ]; then
               echo "Push failed after $max_attempts attempts"
-              if [ -n "$remote_sha" ]; then
-                echo "Last observed remote gh-pages SHA: $remote_sha"
-              fi
-              echo "Verify TARGET_REPO_TOKEN has write access to ${TARGET_REPO} and target branch rules allow this push."
               exit 1
             fi
 
-            # Exponential backoff (better than fixed sleep)
-            sleep_time=$((5 * attempt))
-            echo "Push failed. Retrying in ${sleep_time}s..."
-            sleep "$sleep_time"
-
+            sleep $((5 * attempt))
             attempt=$((attempt + 1))
           done
