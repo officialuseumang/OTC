@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main   # trigger only when main is updated
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-opentechcommunity-gh-pages
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -17,10 +22,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 1
 
       - name: Deploy to target gh-pages branch
         env:
           TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+          GIT_TERMINAL_PROMPT: "0"
         run: |
           set -euo pipefail
 
@@ -31,14 +38,15 @@ jobs:
 
           echo "::add-mask::$TARGET_REPO_TOKEN"
 
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
+          git config --local user.name "github-actions"
+          git config --local user.email "actions@github.com"
 
           # Remove checkout's default github.com auth header so PAT in remote URL is used.
           git config --local --unset-all http.https://github.com/.extraheader || true
 
           # Add target repo
+          git remote remove target 2>/dev/null || true
           git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/opentechcommunity/opentechcommunity.github.io.git
 
           # Push current checked-out ref (main) → gh-pages
-          git push target HEAD:gh-pages --force
+          git push target HEAD:gh-pages --force --porcelain
