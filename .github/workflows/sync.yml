@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - gh-pages   # change if needed
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -16,6 +17,8 @@ jobs:
     steps:
       - name: Checkout acc-one source repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Push to acc-two target repo
         run: |
@@ -24,4 +27,4 @@ jobs:
 
           git remote add target https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/opentechcommunity/opentechcommunity.github.io.git
           
-          git push target main --force
+          git push target HEAD:main --force
