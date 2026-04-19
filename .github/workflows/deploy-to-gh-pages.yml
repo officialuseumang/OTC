@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout source repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
           fetch-depth: 1
@@ -89,6 +89,7 @@ jobs:
 
             if [ "$attempt" -eq "$max_attempts" ]; then
               echo "Push failed after $max_attempts attempts"
+              echo "Verify TARGET_REPO_TOKEN has write access to ${TARGET_REPO} and target branch rules allow this push."
               exit 1
             fi
 
