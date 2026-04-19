@@ -1,36 +1,101 @@
-# Push with retries (handles transient failures, race conditions, and lease issues)
-max_attempts=3
-attempt=1
+name: Deploy to opentechcommunity gh-pages
 
-while [ "$attempt" -le "$max_attempts" ]; do
-  echo "Attempt $attempt of $max_attempts..."
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
-  # Always fetch latest gh-pages to avoid stale lease issues
-  git fetch target gh-pages || true
+concurrency:
+  group: deploy-opentechcommunity-gh-pages
+  cancel-in-progress: true
 
-  if git ls-remote --exit-code --heads target gh-pages >/dev/null 2>&1; then
-    # Use force-with-lease for safety (prevents overwriting unexpected changes)
-    if git push target HEAD:gh-pages --force-with-lease=gh-pages --porcelain; then
-      echo "Push succeeded on attempt $attempt"
-      break
-    fi
-  else
-    # First push (branch doesn't exist yet)
-    if git push target HEAD:gh-pages --porcelain; then
-      echo "Initial push succeeded on attempt $attempt"
-      break
-    fi
-  fi
+jobs:
+  deploy:
+    if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
 
-  if [ "$attempt" -eq "$max_attempts" ]; then
-    echo "Push failed after $max_attempts attempts"
-    exit 1
-  fi
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          clean: true
 
-  # Exponential backoff (better than fixed sleep)
-  sleep_time=$((5 * attempt))
-  echo "Push failed. Retrying in ${sleep_time}s..."
-  sleep "$sleep_time"
+      - name: Deploy to target gh-pages branch
+        env:
+          TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+          GIT_TERMINAL_PROMPT: "0"
+          SOURCE_REPO: ctpl-git/ctpl-sys-site-opentechcommunity
+          TARGET_REPO: opentechcommunity/opentechcommunity.github.io
+        run: |
+          set -euo pipefail
 
-  attempt=$((attempt + 1))
-done
+          if [ -z "$TARGET_REPO_TOKEN" ]; then
+            echo "TARGET_REPO_TOKEN is not set"
+            exit 1
+          fi
+
+          if [ "${GITHUB_REPOSITORY}" != "$SOURCE_REPO" ]; then
+            echo "Refusing to deploy from unexpected source repository: ${GITHUB_REPOSITORY}"
+            exit 1
+          fi
+
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "Refusing to deploy from unexpected source ref: ${GITHUB_REF}"
+            exit 1
+          fi
+
+          echo "::add-mask::$TARGET_REPO_TOKEN"
+
+          git config --local user.name "github-actions"
+          git config --local user.email "actions@github.com"
+          git config --local --unset-all http.https://github.com/.extraheader || true
+
+          git remote remove target 2>/dev/null || true
+          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/${TARGET_REPO}.git
+          git ls-remote --exit-code target HEAD >/dev/null
+
+          # Push with retries (handles transient failures, race conditions, and lease issues)
+          max_attempts=3
+          attempt=1
+
+          while [ "$attempt" -le "$max_attempts" ]; do
+            echo "Attempt $attempt of $max_attempts..."
+
+            # Always fetch latest gh-pages to avoid stale lease issues
+            git fetch target gh-pages || true
+
+            if git ls-remote --exit-code --heads target gh-pages >/dev/null 2>&1; then
+              # Use force-with-lease for safety (prevents overwriting unexpected changes)
+              if git push target HEAD:gh-pages --force-with-lease=gh-pages --porcelain; then
+                echo "Push succeeded on attempt $attempt"
+                break
+              fi
+            else
+              # First push (branch doesn't exist yet)
+              if git push target HEAD:gh-pages --porcelain; then
+                echo "Initial push succeeded on attempt $attempt"
+                break
+              fi
+            fi
+
+            if [ "$attempt" -eq "$max_attempts" ]; then
+              echo "Push failed after $max_attempts attempts"
+              exit 1
+            fi
+
+            # Exponential backoff (better than fixed sleep)
+            sleep_time=$((5 * attempt))
+            echo "Push failed. Retrying in ${sleep_time}s..."
+            sleep "$sleep_time"
+
+            attempt=$((attempt + 1))
+          done
