@@ -66,9 +66,27 @@ jobs:
           git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/${TARGET_REPO}.git
           git ls-remote --exit-code target HEAD >/dev/null
 
-          # Push current checked-out ref (main) -> gh-pages with lease protection.
-          if git ls-remote --exit-code --heads target gh-pages >/dev/null 2>&1; then
-            git push target HEAD:gh-pages --force-with-lease=gh-pages --porcelain
-          else
-            git push target HEAD:gh-pages --porcelain
-          fi
+          # Push with retries to reduce flaky failures from transient network/API issues.
+          max_attempts=3
+          attempt=1
+          while [ "$attempt" -le "$max_attempts" ]; do
+            if git ls-remote --exit-code --heads target gh-pages >/dev/null 2>&1; then
+              push_cmd=(git push target HEAD:gh-pages --force-with-lease=gh-pages --porcelain)
+            else
+              push_cmd=(git push target HEAD:gh-pages --porcelain)
+            fi
+
+            if "${push_cmd[@]}"; then
+              echo "Push succeeded on attempt $attempt"
+              break
+            fi
+
+            if [ "$attempt" -eq "$max_attempts" ]; then
+              echo "Push failed after $max_attempts attempts"
+              exit 1
+            fi
+
+            echo "Push failed on attempt $attempt. Retrying in 5 seconds..."
+            sleep 5
+            attempt=$((attempt + 1))
+          done
