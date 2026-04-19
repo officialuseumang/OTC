@@ -1,0 +1,25 @@
+name: Deploy to opentechcommunity gh-pages
+
+on:
+  push:
+    branches:
+      - main   # trigger only when main is updated
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+
+      - name: Deploy to target gh-pages branch
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+          # Add target repo
+          git remote add target https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/opentechcommunity/opentechcommunity.github.io.git
+
+          # Push main → gh-pages
+          git push target main:gh-pages --force
