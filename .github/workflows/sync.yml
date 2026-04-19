@@ -1,0 +1,27 @@
+name: Sync acc-one to acc-two (ctpl-git -> opentechcommunity)
+
+# acc-one (source): https://github.com/ctpl-git/ctpl-sys-site-opentechcommunity/
+# acc-two (target): https://github.com/opentechcommunity/opentechcommunity.github.io
+# sync from branch "gh-pages"
+
+on:
+  push:
+    branches:
+      - gh-pages   # change if needed
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout acc-one source repo
+        uses: actions/checkout@v4
+
+      - name: Push to acc-two target repo
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+          git remote add target https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/opentechcommunity/opentechcommunity.github.io.git
+          
+          git push target main --force
