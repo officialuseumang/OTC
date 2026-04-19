@@ -23,8 +23,9 @@ jobs:
 
     steps:
       - name: Checkout source repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
+          ref: main
           persist-credentials: false
           fetch-depth: 1
           clean: true
@@ -67,49 +68,30 @@ jobs:
           git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/${TARGET_REPO}.git
 
           if ! git ls-remote --exit-code target HEAD; then
-            echo "Cannot access target repo ${TARGET_REPO} with TARGET_REPO_TOKEN"
-            echo "Verify the secret exists, is valid, and has repository write access."
+            echo "Cannot access target repo ${TARGET_REPO}"
             exit 1
           fi
 
-          if ! git push --dry-run target HEAD:gh-pages; then
-            echo "Preflight push check failed for target branch gh-pages"
-            echo "Verify token write permissions and target branch protection rules."
-            exit 1
-          fi
-
-          # Retry push logic
+          # Retry push logic (reliable deploy)
           max_attempts=3
           attempt=1
 
           while [ "$attempt" -le "$max_attempts" ]; do
             echo "Attempt $attempt of $max_attempts..."
 
-            remote_sha=""
-            if git ls-remote --exit-code --heads target gh-pages >/dev/null 2>&1; then
-              remote_sha="$(git ls-remote --heads target gh-pages | awk '{print $1}')"
-              if git push target HEAD:gh-pages --force-with-lease=refs/heads/gh-pages:${remote_sha} --porcelain; then
-                echo "Push succeeded on attempt $attempt"
-                break
-              fi
-            else
-              if git push target HEAD:gh-pages --porcelain; then
-                echo "Initial push succeeded on attempt $attempt"
-                break
-              fi
+            if git push target HEAD:gh-pages --force --porcelain; then
+              echo "Push succeeded on attempt $attempt"
+              break
             fi
 
             if [ "$attempt" -eq "$max_attempts" ]; then
               echo "Push failed after $max_attempts attempts"
-              if [ -n "$remote_sha" ]; then
-                echo "Last observed remote gh-pages SHA: $remote_sha"
-              fi
-              echo "Verify TARGET_REPO_TOKEN has write access to ${TARGET_REPO} and target branch rules allow this push."
               exit 1
             fi
 
             sleep_time=$((5 * attempt))
-            echo "Push failed. Retrying in ${sleep_time}s..."
+            echo "Retrying in ${sleep_time}s..."
             sleep "$sleep_time"
+
             attempt=$((attempt + 1))
           done
