@@ -70,12 +70,11 @@ jobs:
           while [ "$attempt" -le "$max_attempts" ]; do
             echo "Attempt $attempt of $max_attempts..."
 
-            # Always fetch latest gh-pages to avoid stale lease issues
-            git fetch target gh-pages || true
-
+            remote_sha=""
             if git ls-remote --exit-code --heads target gh-pages >/dev/null 2>&1; then
-              # Use force-with-lease for safety (prevents overwriting unexpected changes)
-              if git push target HEAD:gh-pages --force-with-lease=gh-pages --porcelain; then
+              remote_sha="$(git ls-remote --heads target gh-pages | awk '{print $1}')"
+              # Use explicit lease value to avoid stale local tracking reference issues in CI.
+              if git push target HEAD:gh-pages --force-with-lease=refs/heads/gh-pages:${remote_sha} --porcelain; then
                 echo "Push succeeded on attempt $attempt"
                 break
               fi
@@ -89,6 +88,9 @@ jobs:
 
             if [ "$attempt" -eq "$max_attempts" ]; then
               echo "Push failed after $max_attempts attempts"
+              if [ -n "$remote_sha" ]; then
+                echo "Last observed remote gh-pages SHA: $remote_sha"
+              fi
               echo "Verify TARGET_REPO_TOKEN has write access to ${TARGET_REPO} and target branch rules allow this push."
               exit 1
             fi
