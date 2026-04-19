@@ -57,15 +57,15 @@ jobs:
 
           echo "::add-mask::$TARGET_REPO_TOKEN"
 
-          git config --local user.name "officialuseumang"
-          git config --local user.email "officialuseumang@gmail.com"
+          git config --local user.name "github-actions"
+          git config --local user.email "actions@github.com"
 
           # Remove default auth so PAT is used
           git config --local --unset-all http.https://github.com/.extraheader || true
 
           # Add target repo
           git remote remove target 2>/dev/null || true
-          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/${TARGET_REPO}.git
+          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/opentechcommunity/opentechcommunity.github.io.git
 
           if ! git ls-remote --exit-code target HEAD; then
             echo "Cannot access target repo ${TARGET_REPO}"
