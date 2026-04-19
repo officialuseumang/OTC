@@ -12,10 +12,14 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: read
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Checkout source repo
@@ -23,16 +27,29 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 1
+          clean: true
 
       - name: Deploy to target gh-pages branch
         env:
           TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
           GIT_TERMINAL_PROMPT: "0"
+          SOURCE_REPO: ctpl-git/ctpl-sys-site-opentechcommunity
+          TARGET_REPO: opentechcommunity/opentechcommunity.github.io
         run: |
           set -euo pipefail
 
           if [ -z "$TARGET_REPO_TOKEN" ]; then
             echo "TARGET_REPO_TOKEN is not set"
+            exit 1
+          fi
+
+          if [ "${GITHUB_REPOSITORY}" != "$SOURCE_REPO" ]; then
+            echo "Refusing to deploy from unexpected source repository: ${GITHUB_REPOSITORY}"
+            exit 1
+          fi
+
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "Refusing to deploy from unexpected source ref: ${GITHUB_REF}"
             exit 1
           fi
 
@@ -46,7 +63,12 @@ jobs:
 
           # Add target repo
           git remote remove target 2>/dev/null || true
-          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/opentechcommunity/opentechcommunity.github.io.git
+          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/${TARGET_REPO}.git
+          git ls-remote --exit-code target HEAD >/dev/null
 
-          # Push current checked-out ref (main) → gh-pages
-          git push target HEAD:gh-pages --force --porcelain
+          # Push current checked-out ref (main) -> gh-pages with lease protection.
+          if git ls-remote --exit-code --heads target gh-pages >/dev/null 2>&1; then
+            git push target HEAD:gh-pages --force-with-lease=gh-pages --porcelain
+          else
+            git push target HEAD:gh-pages --porcelain
+          fi
