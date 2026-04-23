@@ -1,97 +1,97 @@
-name: Deploy to opentechcommunity gh-pages
+  name: Deploy to opentechcommunity gh-pages
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  on:
+    push:
+      branches:
+        - gh-pages
+    workflow_dispatch:
 
-concurrency:
-  group: deploy-opentechcommunity-gh-pages
-  cancel-in-progress: true
+  concurrency:
+    group: deploy-opentechcommunity-gh-pages
+    cancel-in-progress: true
 
-jobs:
-  deploy:
-    if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    defaults:
-      run:
-        shell: bash
+  jobs:
+    deploy:
+      if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/gh-pages'
+      runs-on: ubuntu-latest
+      timeout-minutes: 10
+      permissions:
+        contents: read
+      defaults:
+        run:
+          shell: bash
 
-    steps:
-      - name: Checkout source repo
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          persist-credentials: false
-          fetch-depth: 1
-          clean: true
+      steps:
+        - name: Checkout source repo
+          uses: actions/checkout@v4
+          with:
+            ref: gh-pages
+            persist-credentials: false
+            fetch-depth: 1
+            clean: true
 
-      - name: Push to target gh-pages
-        env:
-          TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
-          GIT_TERMINAL_PROMPT: "0"
-          SOURCE_REPO: ctpl-git/ctpl-sys-site-opentechcommunity
-          TARGET_REPO: opentechcommunity/opentechcommunity.github.io
-        run: |
-          set -euo pipefail
-          trap 'echo "Failure at line $LINENO while running: $BASH_COMMAND"' ERR
+        - name: Push to target gh-pages
+          env:
+            TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+            GIT_TERMINAL_PROMPT: "0"
+            SOURCE_REPO: ctpl-git/ctpl-sys-site-opentechcommunity
+            TARGET_REPO: opentechcommunity/opentechcommunity.github.io
+          run: |
+            set -euo pipefail
+            trap 'echo "Failure at line $LINENO while running: $BASH_COMMAND"' ERR
 
-          if [ -z "$TARGET_REPO_TOKEN" ]; then
-            echo "Missing TARGET_REPO_TOKEN"
-            exit 1
-          fi
-
-          if [ "${GITHUB_REPOSITORY}" != "$SOURCE_REPO" ]; then
-            echo "Refusing to deploy from unexpected source repository: ${GITHUB_REPOSITORY}"
-            exit 1
-          fi
-
-          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
-            echo "Refusing to deploy from unexpected source ref: ${GITHUB_REF}"
-            exit 1
-          fi
-
-          echo "::add-mask::$TARGET_REPO_TOKEN"
-
-          git config --local user.name "github-actions"
-          git config --local user.email "actions@github.com"
-
-          # Remove default auth so PAT is used
-          git config --local --unset-all http.https://github.com/.extraheader || true
-
-          # Add target repo
-          git remote remove target 2>/dev/null || true
-          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/opentechcommunity/opentechcommunity.github.io.git
-
-          if ! git ls-remote --exit-code target HEAD; then
-            echo "Cannot access target repo ${TARGET_REPO}"
-            exit 1
-          fi
-
-          # Retry push logic (reliable deploy)
-          max_attempts=3
-          attempt=1
-
-          while [ "$attempt" -le "$max_attempts" ]; do
-            echo "Attempt $attempt of $max_attempts..."
-
-            if git push target HEAD:gh-pages --force --porcelain; then
-              echo "Push succeeded on attempt $attempt"
-              break
-            fi
-
-            if [ "$attempt" -eq "$max_attempts" ]; then
-              echo "Push failed after $max_attempts attempts"
+            if [ -z "$TARGET_REPO_TOKEN" ]; then
+              echo "Missing TARGET_REPO_TOKEN"
               exit 1
             fi
 
-            sleep_time=$((5 * attempt))
-            echo "Retrying in ${sleep_time}s..."
-            sleep "$sleep_time"
+            if [ "${GITHUB_REPOSITORY}" != "$SOURCE_REPO" ]; then
+              echo "Refusing to deploy from unexpected source repository: ${GITHUB_REPOSITORY}"
+              exit 1
+            fi
 
-            attempt=$((attempt + 1))
-          done
+            if [ "${GITHUB_REF}" != "refs/heads/gh-pages" ]; then
+              echo "Refusing to deploy from unexpected source ref: ${GITHUB_REF}"
+              exit 1
+            fi
+
+            echo "::add-mask::$TARGET_REPO_TOKEN"
+
+            git config --local user.name "github-actions"
+            git config --local user.email "actions@github.com"
+
+            # Remove default auth so PAT is used
+            git config --local --unset-all http.https://github.com/.extraheader || true
+
+            # Add target repo
+            git remote remove target 2>/dev/null || true
+            git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/opentechcommunity/opentechcommunity.github.io.git
+
+            if ! git ls-remote --exit-code target HEAD; then
+              echo "Cannot access target repo ${TARGET_REPO}"
+              exit 1
+            fi
+
+            # Retry push logic (reliable deploy)
+            max_attempts=3
+            attempt=1
+
+            while [ "$attempt" -le "$max_attempts" ]; do
+              echo "Attempt $attempt of $max_attempts..."
+
+              if git push target HEAD:gh-pages --force --porcelain; then
+                echo "Push succeeded on attempt $attempt"
+                break
+              fi
+
+              if [ "$attempt" -eq "$max_attempts" ]; then
+                echo "Push failed after $max_attempts attempts"
+                exit 1
+              fi
+
+              sleep_time=$((5 * attempt))
+              echo "Retrying in ${sleep_time}s..."
+              sleep "$sleep_time"
+
+              attempt=$((attempt + 1))
+            done
