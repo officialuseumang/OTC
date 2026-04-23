@@ -3,7 +3,7 @@
   on:
     push:
       branches:
-        - gh-pages
+        - main
     workflow_dispatch:
 
   concurrency:
@@ -12,7 +12,7 @@
 
   jobs:
     deploy:
-      if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/gh-pages'
+      if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/main'
       runs-on: ubuntu-latest
       timeout-minutes: 10
       permissions:
@@ -25,7 +25,7 @@
         - name: Checkout source repo
           uses: actions/checkout@v4
           with:
-            ref: gh-pages
+            ref: main
             persist-credentials: false
             fetch-depth: 1
             clean: true
@@ -50,7 +50,7 @@
               exit 1
             fi
 
-            if [ "${GITHUB_REF}" != "refs/heads/gh-pages" ]; then
+            if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
               echo "Refusing to deploy from unexpected source ref: ${GITHUB_REF}"
               exit 1
             fi
