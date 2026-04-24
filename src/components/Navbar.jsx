@@ -92,7 +92,7 @@ export default function Navbar() {
           <img
             src={otcLogo}
             alt={`${site.communityName} logo`}
-            className="h-[60px] w-[60px] rounded-[2px] border object-cover otc-divider"
+            className="h-12 w-12 rounded-[2px] border object-cover otc-divider sm:h-[60px] sm:w-[60px]"
           />
           <div className="leading-tight">
             <div className="text-base font-semibold tracking-tight sm:text-lg">

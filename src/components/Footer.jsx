@@ -63,8 +63,8 @@ export default function Footer() {
 
         <div className="grid gap-3">
           <div
-            className="text-[2rem] leading-none otc-muted"
-            style={{ width: `${socialHeadingWidth}px` }}
+            className="text-[2rem] leading-none otc-muted max-w-full"
+            style={{ width: `min(100%, ${socialHeadingWidth}px)` }}
             aria-label="Social"
           >
             <span className="flex items-center justify-between" aria-hidden="true">
@@ -73,7 +73,7 @@ export default function Footer() {
               ))}
             </span>
           </div>
-          <div className="flex items-center" style={{ gap: `${SOCIAL_ICON_GAP}px` }}>
+          <div className="flex flex-wrap items-center" style={{ gap: `${SOCIAL_ICON_GAP}px` }}>
             {site.footer.socials.map((s) => (
               <a
                 key={s.href}
@@ -89,7 +89,7 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <p className="text-base tracking-wide otc-muted whitespace-nowrap">
+          <p className="text-base tracking-wide otc-muted">
             © 2026 Open Tech Community
           </p>
         </div>
