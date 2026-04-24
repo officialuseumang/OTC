@@ -27,7 +27,7 @@
           with:
             ref: main
             persist-credentials: false
-            fetch-depth: 1
+            fetch-depth: 0
             clean: true
 
         - name: Push to target gh-pages
