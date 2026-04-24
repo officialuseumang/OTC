@@ -1,97 +1,96 @@
-  name: Deploy to opentechcommunity gh-pages
+name: Deploy to opentechcommunity gh-pages
 
-  on:
-    push:
-      branches:
-        - main
-    workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
-  concurrency:
-    group: deploy-opentechcommunity-gh-pages
-    cancel-in-progress: true
+concurrency:
+  group: deploy-opentechcommunity-gh-pages
+  cancel-in-progress: true
 
-  jobs:
-    deploy:
-      if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/main'
-      runs-on: ubuntu-latest
-      timeout-minutes: 10
-      permissions:
-        contents: read
-      defaults:
-        run:
-          shell: bash
+jobs:
+  deploy:
+    if: github.repository == 'ctpl-git/ctpl-sys-site-opentechcommunity' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
 
-      steps:
-        - name: Checkout source repo
-          uses: actions/checkout@v4
-          with:
-            ref: main
-            persist-credentials: false
-            fetch-depth: 0
-            clean: true
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 0
+          clean: true
 
-        - name: Push to target gh-pages
-          env:
-            TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
-            GIT_TERMINAL_PROMPT: "0"
-            SOURCE_REPO: ctpl-git/ctpl-sys-site-opentechcommunity
-            TARGET_REPO: opentechcommunity/opentechcommunity.github.io
-          run: |
-            set -euo pipefail
-            trap 'echo "Failure at line $LINENO while running: $BASH_COMMAND"' ERR
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-            if [ -z "$TARGET_REPO_TOKEN" ]; then
-              echo "Missing TARGET_REPO_TOKEN"
-              exit 1
-            fi
+      - name: Install dependencies
+        run: npm ci
 
-            if [ "${GITHUB_REPOSITORY}" != "$SOURCE_REPO" ]; then
-              echo "Refusing to deploy from unexpected source repository: ${GITHUB_REPOSITORY}"
-              exit 1
-            fi
+      - name: Build
+        run: npm run build
 
-            if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
-              echo "Refusing to deploy from unexpected source ref: ${GITHUB_REF}"
-              exit 1
-            fi
+      - name: Push dist to target gh-pages
+        env:
+          TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+          GIT_TERMINAL_PROMPT: "0"
+          SOURCE_REPO: ctpl-git/ctpl-sys-site-opentechcommunity
+          TARGET_REPO: opentechcommunity/opentechcommunity.github.io
+        run: |
+          set -euo pipefail
+          trap 'echo "Failure at line $LINENO while running: $BASH_COMMAND"' ERR
 
-            echo "::add-mask::$TARGET_REPO_TOKEN"
+          if [ -z "$TARGET_REPO_TOKEN" ]; then
+            echo "Missing TARGET_REPO_TOKEN"
+            exit 1
+          fi
 
-            git config --local user.name "github-actions"
-            git config --local user.email "actions@github.com"
+          if [ "${GITHUB_REPOSITORY}" != "$SOURCE_REPO" ]; then
+            echo "Refusing to deploy from unexpected source repository: ${GITHUB_REPOSITORY}"
+            exit 1
+          fi
 
-            # Remove default auth so PAT is used
-            git config --local --unset-all http.https://github.com/.extraheader || true
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "Refusing to deploy from unexpected source ref: ${GITHUB_REF}"
+            exit 1
+          fi
 
-            # Add target repo
-            git remote remove target 2>/dev/null || true
-            git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/opentechcommunity/opentechcommunity.github.io.git
+          echo "::add-mask::$TARGET_REPO_TOKEN"
 
-            if ! git ls-remote --exit-code target HEAD; then
-              echo "Cannot access target repo ${TARGET_REPO}"
-              exit 1
-            fi
+          # Ensure dist output exists
+          if [ ! -d dist ]; then
+            echo "Missing dist output"
+            exit 1
+          fi
 
-            # Retry push logic (reliable deploy)
-            max_attempts=3
-            attempt=1
+          # Deploy the built site to the Pages repo
+          cd dist
+          touch .nojekyll
 
-            while [ "$attempt" -le "$max_attempts" ]; do
-              echo "Attempt $attempt of $max_attempts..."
+          git init
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
-              if git push target HEAD:gh-pages --force --porcelain; then
-                echo "Push succeeded on attempt $attempt"
-                break
-              fi
+          git add -A
+          git commit -m "Deploy" || true
 
-              if [ "$attempt" -eq "$max_attempts" ]; then
-                echo "Push failed after $max_attempts attempts"
-                exit 1
-              fi
+          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/opentechcommunity/opentechcommunity.github.io.git
 
-              sleep_time=$((5 * attempt))
-              echo "Retrying in ${sleep_time}s..."
-              sleep "$sleep_time"
+          if ! git ls-remote --exit-code target HEAD; then
+            echo "Cannot access target repo ${TARGET_REPO}"
+            exit 1
+          fi
 
-              attempt=$((attempt + 1))
-            done
+          git push target HEAD:gh-pages --force --porcelain
