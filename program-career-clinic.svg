@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Career Clinic program image">
+  <defs>
+    <linearGradient id="gCC" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E11D48"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="#FFF7F7"/>
+  <path d="M 0 530 C 240 420, 460 700, 720 600 C 980 500, 1080 320, 1200 360 L 1200 675 L 0 675 Z" fill="url(#gCC)" opacity="0.18"/>
+
+  <g opacity="0.92">
+    <rect x="110" y="110" width="980" height="455" rx="18" fill="#FFFFFF" stroke="#F1C5C7"/>
+
+    <g transform="translate(170 205)">
+      <rect width="420" height="270" rx="14" fill="url(#gCC)" opacity="0.14"/>
+      <g opacity="0.9">
+        <rect x="92" y="84" width="250" height="36" rx="12" fill="#FFFFFF"/>
+        <rect x="92" y="136" width="300" height="36" rx="12" fill="#FFFFFF"/>
+        <rect x="92" y="188" width="220" height="36" rx="12" fill="#FFFFFF"/>
+        <path d="M 126 102 h 120" stroke="#E11D48" stroke-width="6" stroke-linecap="round" opacity="0.60"/>
+        <path d="M 126 154 h 152" stroke="#F97316" stroke-width="6" stroke-linecap="round" opacity="0.50"/>
+        <path d="M 126 206 h 96" stroke="#E11D48" stroke-width="6" stroke-linecap="round" opacity="0.50"/>
+        <circle cx="356" cy="154" r="12" fill="#F97316" opacity="0.55"/>
+      </g>
+    </g>
+
+    <g transform="translate(620 190)">
+      <rect width="420" height="20" rx="10" fill="#111827" opacity="0.08"/>
+      <rect y="38" width="390" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <rect y="64" width="420" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <rect y="90" width="350" height="14" rx="7" fill="#111827" opacity="0.06"/>
+      <g transform="translate(0 132)">
+        <rect width="152" height="38" rx="10" fill="url(#gCC)"/>
+        <rect x="164" width="124" height="38" rx="10" fill="#FFFFFF" stroke="#E11D48"/>
+      </g>
+    </g>
+  </g>
+</svg>

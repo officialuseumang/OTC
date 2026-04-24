@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Program image placeholder">
+  <defs>
+    <linearGradient id="gP" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E11D48"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="#FFF7F7"/>
+  <path d="M 0 520 C 260 420, 420 720, 720 590 C 960 490, 1080 320, 1200 360 L 1200 675 L 0 675 Z" fill="url(#gP)" opacity="0.22"/>
+  <g opacity="0.85">
+    <rect x="88" y="92" width="1024" height="491" rx="18" fill="#fff" stroke="#F1C5C7"/>
+    <rect x="130" y="140" width="420" height="22" rx="11" fill="#111827" opacity="0.10"/>
+    <rect x="130" y="184" width="640" height="14" rx="7" fill="#111827" opacity="0.07"/>
+    <rect x="130" y="214" width="520" height="14" rx="7" fill="#111827" opacity="0.07"/>
+    <circle cx="980" cy="172" r="54" fill="url(#gP)" opacity="0.20"/>
+    <path d="M 930 172 H 1030" stroke="#E11D48" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+    <path d="M 980 122 V 222" stroke="#F97316" stroke-width="6" stroke-linecap="round" opacity="0.45"/>
+  </g>
+</svg>
